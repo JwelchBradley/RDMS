@@ -5,8 +5,8 @@
 $connection_error = false;
 $connection_error_message = "";
 
-$con = @mysqli_connect("localhost", "NewsUser",
-                        "asdfqwer1234", "newsapplication");
+$con = @mysqli_connect("localhost", "root",
+    "password", "sakila");
 
 if(mysqli_connect_errno()){
     $connection_error = true;
@@ -40,40 +40,53 @@ function output_error ($title, $message) {
     <?php if($connection_error){
         output_error("Database connection failure!", $connection_error_message);
     }else{
-    function output_table_open(){
-        echo "<table class=\"table table-striped\">\n";
-        echo "<tr class=\"pizzaDataHeaderRow\">\n";
-        echo"    <td>Name</td>\n";
-        echo"    <td>Age</td>\n";
-        echo"    <td>Gender</td>\n";
-        echo "</tr>\n";
-    }
+        function output_table_open(){
+            echo "<table class=\"table table-striped\">\n";
+            echo "<tr class=\"pizzaDataHeaderRow\">\n";
+            echo"    <td>ArticleID</td>\n";
+            echo"    <td>Title</td>\n";
+            echo"    <td>Category</td>\n";
+            echo"    <td>Date Published</td>\n";
+            echo"    <td>Last Updated</td>\n";
+            echo"    <td>Description</td>\n";
+            echo"    <td>Language</td>\n";
+            echo "</tr>\n";
+        }
 
-    function output_table_close(){
-        echo "</table>";
-    }
+        function output_table_close(){
+            echo "</table>";
+        }
 
-    function output_person_row($name, $age, $gender){
-        echo "<tr\n";
-        echo "    <td>" . $name . "</td>\n";
-        echo "    <td>" . $age . "</td>\n";
-        echo "    <td>" . $gender . "</td>\n";
-        echo "</td>";
-    }
+        function output_article_row($ArticleID, $Title, $Category, $DatePublished, $LastUpdated, $Description, $Language){
+            echo "<tr\n";
+            echo "    <td>" . $ArticleID . "</td>\n";
+            echo "    <td>" . $Title . "</td>\n";
+            echo "    <td>" . $Category . "</td>\n";
+            echo "    <td>" . $DatePublished . "</td>\n";
+            echo "    <td>" . $LastUpdated . "</td>\n";
+            echo "    <td>" . $Description . "</td>\n";
+            echo "    <td>" . $Language . "</td>\n";
+            echo "</td>";
+        }
 
-    function output_person_detail_row($pizzas, $pizzerias){
-        echo "<tr>\n";
-        echo "    <td colspan=\"3\>\n";
-        echo "          Pizzas Eaten: " . "" . "<br/>\n";
-        echo "          Pizzerias Frequented: " . "" . "\n";
-        echo "     </td>\n";
-        echo "</tr>\n";
-    }
+        function output_person_detail_row($FirstName, $LastName, $Department, $Citation){
 
-        $query = " SELECT t0.name, t0.age, t0.gender, t1.pizza, t2.pizzeria"
-            . "FROM Person t0"
-            . " LEFT OUTER JOIN Eats t1 ON t0.name = t1.name"
-            . " LEFT OUTER JOIN Frequents t2 ON t0.name = t2.name";
+            $sources_str = "None";
+            if( sizeof($Citation) > 0)
+                $sources_str = implode(", ", $Citation);
+
+            echo "<tr>\n";
+            echo "    <td colspan=\"3\>\n";
+            echo "          Author: " . $FirstName . " " . $LastName . ", in " . $Department . " department" . "<br/>\n";
+            echo "          Sources: " . $sources_str . "\n";
+            echo "     </td>\n";
+            echo "</tr>\n";
+        }
+
+        $query = " SELECT *"
+            . "FROM Article t0"
+            . " LEFT OUTER JOIN Source t1 ON t0.ArticleID = t1.Article"
+            . " LEFT OUTER JOIN Author t2 ON t0.Author = t2.AuthorID";
 
         $result = mysqli_query($con, $query);
 
@@ -82,7 +95,7 @@ function output_error ($title, $message) {
                 output_error("Data retrieval error!", mysqli_error($con));
             }
             else{
-                echo "No Pizza Data Found!";
+                echo "No Article Data Found!";
             }
         }else {
             output_table_open();
