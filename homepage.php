@@ -1,0 +1,58 @@
+<?php $this_page='News DB Home'?>
+<head>
+    <title>News Database Homepage</title>
+</head>
+
+<?php include_once("header.php"); ?>
+
+<body>
+<div class="fixed-top stack-top0 flex-fill">
+        <img src="Images/Masthead.gif" width=100%>
+</div>
+
+
+<div class="container p-5 stack-top8 position-relative">
+    <h1 class="text-light display-1 fw-bold">News Database</h1>
+    <div class="container bg-light">
+        <p class="text-dark lead fw-bold">
+            We here at News Database offer you the best of services for importing all of your news data.
+            You can even see reports on it to help you interact with your data dynamically.
+        </p>
+        <h4 class="text-dark fw-bold">
+            Here is what you can import:
+        </h4>
+        <ul>
+            <li>
+                Data 1
+            </li>
+            <li>
+                Data 1
+            </li>
+            <li>
+                Data 1
+            </li>
+        </ul>
+        <h4 class="text-dark fw-bold">
+            Here is what you can report:
+        </h4>
+        <ul>
+            <li>
+                Data 1
+            </li>
+            <li>
+                Data 1
+            </li>
+            <li>
+                Data 1
+            </li>
+        </ul>
+        <p class="text-dark lead fw-bold">
+            Import and report to your hearts content!!! If you encounter any problems please contact us at our
+            customer service email fakecustomerservice@gmail.com.
+        </p>
+    </div>
+</div>
+
+</body>
+
+<?php include_once ("footer.php"); ?>
