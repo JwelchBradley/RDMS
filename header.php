@@ -72,16 +72,16 @@
                     <a class="nav-link dropdown-toggle<?php checkActiveDropdown(['Import News Article', 'Import Other 1', 'Import Other 2'], $this_page)?> data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Imports</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item<?php checkActivePage('Import News Article', $this_page)?> href="importnewsarticledata.php">Import News Article</a>
-                        <a class="dropdown-item<?php checkActivePage('Import Other 1', $this_page)?>" href="#">Import 1</a>
-                        <a class="dropdown-item<?php checkActivePage('Import Other 2', $this_page)?>" href="#">Import 2</a>
+                        <a class="dropdown-item<?php checkActivePage('Import Other 1', $this_page)?>" href="Import2.php">Import 1</a>
+                        <a class="dropdown-item<?php checkActivePage('Import Other 2', $this_page)?>" href="Import3.php">Import 2</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle<?php checkActiveDropdown(['Report News Article', 'Report Other 1', 'Report Other 2'], $this_page)?> data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reports</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item<?php checkActivePage('Report News Article', $this_page)?> href="news_article_report.php">Report News Article</a>
-                        <a class="dropdown-item<?php checkActivePage('Report Other 1', $this_page)?>" href="#">Import 1</a>
-                        <a class="dropdown-item<?php checkActivePage('Report Other 2', $this_page)?>" href="#">Import 2</a>
+                        <a class="dropdown-item<?php checkActivePage('Report Other 1', $this_page)?>" href="Report2.php">Import 1</a>
+                        <a class="dropdown-item<?php checkActivePage('Report Other 2', $this_page)?>" href="Report3.php">Import 2</a>
                     </div>
                 </li>
             </ul>

@@ -16,7 +16,8 @@
     <div class="container bg-light">
         <p class="text-dark lead fw-bold">
             We here at News Database offer you the best of services for importing all of your news data.
-            You can even see reports on it to help you interact with your data dynamically.
+            You can even see reports on it to help you interact with your data dynamically. If you're curious what
+            data you can use here, look no further as we have an easy to read list right here.
         </p>
         <h4 class="text-dark fw-bold">
             Here is what you can import:
@@ -47,7 +48,8 @@
             </li>
         </ul>
         <p class="text-dark lead fw-bold">
-            Import and report to your hearts content!!! If you encounter any problems please contact us at our
+            Import and report to your hearts content!!! If you want to update content just send in the same file with your updated
+            data, and we'll handle the rest. If you encounter any problems please contact us at our
             customer service email fakecustomerservice@gmail.com.
         </p>
     </div>
