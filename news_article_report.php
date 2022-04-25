@@ -6,7 +6,7 @@ $connection_error = false;
 $connection_error_message = "";
 
 $con = @mysqli_connect("localhost", "root",
-    "password", "sakila");
+    "Po1@m@1u43", "sakila");
 
 if(mysqli_connect_errno()){
     $connection_error = true;
@@ -69,7 +69,7 @@ function output_error ($title, $message) {
             echo "</td>";
         }
 
-        function output_person_detail_row($FirstName, $LastName, $Department, $Citation){
+        function output_person_detail_row($Author, $Citation){
 
             $sources_str = "None";
             if( sizeof($Citation) > 0)
@@ -83,10 +83,10 @@ function output_error ($title, $message) {
             echo "</tr>\n";
         }
 
-        $query = " SELECT *"
-            . "FROM Article t0"
-            . " LEFT OUTER JOIN Source t1 ON t0.ArticleID = t1.Article"
-            . " LEFT OUTER JOIN Author t2 ON t0.Author = t2.AuthorID";
+        $query = " SELECT * "
+            . "FROM article t0"
+            . " LEFT OUTER JOIN source t1 ON t0.ArticleID = t1.Article"
+            . " LEFT OUTER JOIN author t2 ON t0.Author = t2.AuthorID";
 
         $result = mysqli_query($con, $query);
 
@@ -100,45 +100,32 @@ function output_error ($title, $message) {
         }else {
             output_table_open();
 
-            $last_name = null;
-            $pizzas = array();
-            $pizzerias = array();
-            $result = null;
-            while ($row = $result->fetch_array()) {
-                if ($last_name != $row["name"]) {
-                    if ($last_name != null) {
-                        output_person_detail_row($pizzas, $pizzerias);
+            $last_article = null;
+            $sources = array();
+            $authors = array();
+
+            while($row = $result -> fetch_array()) {
+                if($last_article != $row["ArticleID"]) {
+                    if($last_article != null) {
+                        output_person_detail_row($authors, $sources);
                     }
 
-                    output_person_row($row["name"], $row["age"], $row["gender"]);
+                    output_article_row($row["ArticleID"], $row["Title"], $row["Category"], $row["DatePublished"], $row["LastUpdated"], $row["Description"], $row["Language"]);
+                    $sources = array();
+                    $authors = array();
 
-                    $pizzas = array();
-                    $pizzerias = array();
                 }
 
-                if (!in_array($row["pizza"], $pizzas))
-                    $pizzas[] = $row["pizza"];
-
-                if (!in_array($row["pizzeria"], $pizzerias))
-                    $pizzerias[] = $row["pizzeria"];
-
-                $last_name = $row["name"];
+                $sources = $row["Citation"];
+                $authors = $row["FirstName"];
+                $last_article = $row["ArticleID"];
             }
 
-            output_person_detail_row($pizzas, $pizzerias);
             output_table_close();
         }
     } ?>
 </div>
 
-<tr>
-    <td>Amy</td>
-    <td>16</td>
-    <td>F</td>
-</tr>
-<tr>
-
-</tr>
 </body>
 
 <?php include_once ("footer.php"); ?>
