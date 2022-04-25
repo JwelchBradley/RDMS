@@ -5,8 +5,8 @@
 $connection_error = false;
 $connection_error_message = "";
 
-$con = @mysqli_connect("localhost", "root",
-    "Po1@m@1u43", "sakila");
+$con = @mysqli_connect("localhost", "newsfella",
+    "password", "sakila");
 
 if(mysqli_connect_errno()){
     $connection_error = true;
@@ -69,7 +69,7 @@ function output_error ($title, $message) {
             echo "</td>";
         }
 
-        function output_person_detail_row($Author, $Citation){
+        function output_person_detail_row($AuthorID, $Citation){
 
             $sources_str = "None";
             if( sizeof($Citation) > 0)
@@ -77,7 +77,7 @@ function output_error ($title, $message) {
 
             echo "<tr>\n";
             echo "    <td colspan=\"3\>\n";
-            echo "          Author: " . $FirstName . " " . $LastName . ", in " . $Department . " department" . "<br/>\n";
+            echo "          Author: " . $AuthorID . "<br/>\n";
             echo "          Sources: " . $sources_str . "\n";
             echo "     </td>\n";
             echo "</tr>\n";
@@ -116,8 +116,10 @@ function output_error ($title, $message) {
 
                 }
 
-                $sources = $row["Citation"];
-                $authors = $row["FirstName"];
+                if(!in_array($row["Citation"], $sources))
+                    $sources = $row["Citation"];
+                if(!in_array($row["FirstName"], $authors))
+                    $authors = $row["FirstName"];
                 $last_article = $row["ArticleID"];
             }
 
