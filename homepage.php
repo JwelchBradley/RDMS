@@ -1,8 +1,5 @@
 <?php $this_page='News DB Home'?>
-<head>
-    <title>News Database Homepage</title>
-</head>
-
+<?php $pageName="News Database Homepage"?>
 <?php include_once("header.php"); ?>
 
 <body>

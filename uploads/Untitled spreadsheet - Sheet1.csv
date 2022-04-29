@@ -1,0 +1,3 @@
+datatest;iddatatest;dataString;dataInt;dataDate;dataLongtext;dataDatetime;dataDecimal;datatest2;iddatatest2;extradata1;extradata2
+;1;test;5;2000-03-23;asdf;2000-03-12 15:06:05;4.34;;1;hello;32
+;100;nonono;7;2000-03-24;qwer;2000-03-12 15:06:06;5.67;;100;word;64

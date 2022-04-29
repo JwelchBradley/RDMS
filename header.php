@@ -1,3 +1,9 @@
+<?php
+if(!isset($pageName)){
+    $pageName="Default Page Name";
+}
+?>
+
 <head>
     <link rel="icon" type="image/x-icon" href="Images/Logo.png">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -25,6 +31,8 @@
             z-index: 0;
         }
     </style>
+
+    <title><?php echo $pageName?></title>
 </head>
 
     <?php
