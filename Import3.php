@@ -1,6 +1,6 @@
 <?php
 $this_page='Import Other 2';
-$pageName="Update Article Category";
+$pageName="Import Article Category";
 $pageFile = 'Import3.php';
 
 $importPageMessage =
@@ -10,13 +10,13 @@ $importPageMessage =
         It's as simple as clicking a few buttons and you can see all of our data neatly laid out for your eyes.
     ";
 
-$tableNames = [ "Article", "Category", "Media" ];
-$tableLengths = [8, 3, 4];
-$columnNames = [ "LanguageID", "Category", "AuthorID", "ArticleType", "Title", "DatePublished", "LastUpdated", "Description", "DepartmentID", "Name", "Description", "ArticleID", "Title", "Type", "Description" ];
-$updateColumns = [ "Title", "Name", "Title" ];
-$foreignKeyColumns = [ "LanguageID", "AuthorID", "DepartmentID", "ArticleID" ];
-$foreignKeyTables = [ "Language", "Author", "Department", "Article" ];
-$foreignKeyColumnsInForeignTable = [ "Description", "FirstName", "Title", "Title"];
+$tableNames = [ "Category", "Media", "Article" ];
+$tableLengths = [3, 4, 8];
+$columnNames = [ "DepartmentID", "Name", "Description", "ArticleID", "Title", "Type", "Description", "LanguageID", "Category", "AuthorID", "ArticleType", "Title", "DatePublished", "LastUpdated", "Description" ];
+$updateColumns = [ "Name", "Title", "Title" ];
+$foreignKeyColumns = [ "DepartmentID", "ArticleID", "LanguageID", "AuthorID" ];
+$foreignKeyTables = [ "Department", "Article", "Language", "Author" ];
+$foreignKeyColumnsInForeignTable = [ "Title", "Title", "Description", "FirstName" ];
 ?>
 
     <head>

@@ -140,6 +140,7 @@ function InsertIntoTable($target_file, $con, $tableNames, $tableLengths, $column
     $contents = file_get_contents($target_file);
     $lines = explode("\n", $contents);
     $file = fopen($target_file, "r") or die("<div class=\"error\">Unable to open file!</div>");
+    echo implode(",", $columnNames);
 
     // Loops through each line
     foreach ($lines as $line) {
@@ -149,6 +150,7 @@ function InsertIntoTable($target_file, $con, $tableNames, $tableLengths, $column
 
         $currentRowIndex=0;
         $currentForeignRow = 0;
+
         for($x = 0; $x < count($tableNames); $x++){
             $tableHeaders = "";
             $valuesForThisTable = null;
@@ -162,7 +164,7 @@ function InsertIntoTable($target_file, $con, $tableNames, $tableLengths, $column
 
                 if(in_array($columnNames[$y], $foreignKeyColumns)){
                     $query = "SELECT * FROM " . $foreignKeyTables[$currentForeignRow] . " WHERE " . $foreignKeyColumnsInForeignTable[$currentForeignRow] . " = '" . $parsed_csv_line[$y] . "'";
-                    echo $query;
+                    //echo $query;
                     $result = mysqli_query($con, $query);
                     $hasFound = true;
                     while ($row = mysqli_fetch_assoc($result) AND $hasFound) {
@@ -170,7 +172,6 @@ function InsertIntoTable($target_file, $con, $tableNames, $tableLengths, $column
                         $hasFound = false;
                     }
                     $currentForeignRow++;
-                    //echo mysqli_fetch_assoc($result);
                 }
                 else if($y<count($parsed_csv_line)){
                     $valuesForThisTable .= $parsed_csv_line[$y] . ",";
@@ -178,7 +179,7 @@ function InsertIntoTable($target_file, $con, $tableNames, $tableLengths, $column
 
                 if(in_array($columnNames[$y], $updateColumns) AND !$isUpdate){
                     $query = "SELECT * FROM " . $tableNames[$x] . " WHERE " . $columnNames[$y] . " = '" . $parsed_csv_line[$y] . "'";
-                    Echo $query;
+                    //Echo $query;
                     $result = mysqli_query($con, $query) -> num_rows;
 
                     if($result > 0){
@@ -224,7 +225,7 @@ function InsertIntoTable($target_file, $con, $tableNames, $tableLengths, $column
                 $sql .= ")";
             }
 
-            echo $sql;
+            //echo $sql;
             $currentRowIndex += $tableLengths[$x];
             mysqli_query($con, $sql);
         }

@@ -5,6 +5,9 @@ if(!isset($pageFile)){
 if(!isset($this_page)){
     $this_page = 'Import Page';
 }
+if(!isset($pageName)){
+    $pageName = "";
+}
 if(!isset($importPageMessage)){
     $importPageMessage = 'Default Import Message';
 }
@@ -28,7 +31,7 @@ if(!isset($importPageMessage)){
 <html>
 <body>
 <div class="container mb-3">
-    <h1 class="text-dark display-3 fw-bold"><?php echo $this_page?></h1>
+    <h1 class="text-dark display-3 fw-bold"><?php echo $pageName?></h1>
 
     <div class="importMessagePadding text-dark lead fw-bold">
         <?php echo $importPageMessage ?>
