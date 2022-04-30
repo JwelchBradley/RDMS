@@ -30,7 +30,6 @@ function output_error ($title, $message) {
 <style>
     .pizzaDataHeaderRow td { padding-right: 20px; }
     .pizzaDataRow td{padding-left: 10px;}
-    .pizzaDataDetailsCell {padding-left: 20px !important;}
 </style>
 
 <body>
@@ -84,7 +83,7 @@ function output_error ($title, $message) {
 
             $author_str = "None";
             if (sizeof($Author) > 0) {
-                $author_str = "author #" . $Author[0] . ", " . $Author[1] . " " . $Author[2] . ", " . $Author[3] . " department\n";
+                $author_str = "author #" . $Author[0] . ", " . $Author[1] . " " . $Author[2] . ", in department " . $Author[3] . "\n";
             }
 
             echo "<tr>\n";
