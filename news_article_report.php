@@ -37,28 +37,33 @@ function output_error ($title, $message) {
 <div class="container">
     <h1>News Data Report</h1>
 
-    <?php if($connection_error){
+    <?php
+    if($connection_error){
         output_error("Database connection failure!", $connection_error_message);
-    }else{
-        function output_table_open(){
+    }
+    else {
+        function output_table_open()
+        {
             echo "<table class=\"table table-striped\">\n";
             echo "<tr class=\"pizzaDataHeaderRow\">\n";
-            echo"    <td>ArticleID</td>\n";
-            echo"    <td>Title</td>\n";
-            echo"    <td>Category</td>\n";
-            echo"    <td>Date Published</td>\n";
-            echo"    <td>Last Updated</td>\n";
-            echo"    <td>Description</td>\n";
-            echo"    <td>Language</td>\n";
+            echo "    <td>ArticleID</td>\n";
+            echo "    <td>Title</td>\n";
+            echo "    <td>Category</td>\n";
+            echo "    <td>Date Published</td>\n";
+            echo "    <td>Last Updated</td>\n";
+            echo "    <td>Description</td>\n";
+            echo "    <td>Language</td>\n";
             echo "</tr>\n";
         }
 
-        function output_table_close(){
+        function output_table_close()
+        {
             echo "</table>";
         }
 
-        function output_article_row($ArticleID, $Title, $Category, $DatePublished, $LastUpdated, $Description, $Language){
-            echo "<tr\n";
+        function output_article_row($ArticleID, $Title, $Category, $DatePublished, $LastUpdated, $Description, $Language)
+        {
+            echo "<tr\n>";
             echo "    <td>" . $ArticleID . "</td>\n";
             echo "    <td>" . $Title . "</td>\n";
             echo "    <td>" . $Category . "</td>\n";
@@ -69,16 +74,23 @@ function output_error ($title, $message) {
             echo "</td>";
         }
 
-        function output_person_detail_row($AuthorID, $Citation){
+        function output_person_detail_row($Author, $Source)
+        {
 
-            $sources_str = "None";
-            if( sizeof($Citation) > 0)
-                $sources_str = implode(", ", $Citation);
+            $source_str = "None";
+            if ($Source[0] != NULL) {
+                $source_str = "source #" . $Source[0] . ", " . $Source[1] . ", " . $Source[2] . ".\n";
+            }
+
+            $author_str = "None";
+            if (sizeof($Author) > 0) {
+                $author_str = "author #" . $Author[0] . ", " . $Author[1] . " " . $Author[2] . ", " . $Author[3] . " department\n";
+            }
 
             echo "<tr>\n";
-            echo "    <td colspan=\"3\>\n";
-            echo "          Author: " . $AuthorID . "<br/>\n";
-            echo "          Sources: " . $sources_str . "\n";
+            echo "    <td style='padding-left: 100px' colspan='7'>\n";
+            echo "  Author: " . $author_str . "\n<br/>";
+            echo "  Source: " . $source_str . "\n<br/>";
             echo "     </td>\n";
             echo "</tr>\n";
         }
@@ -90,45 +102,50 @@ function output_error ($title, $message) {
 
         $result = mysqli_query($con, $query);
 
-        if(! $result){
-            if(mysqli_errno($con)){
+        if (!$result) {
+            if (mysqli_errno($con)) {
                 output_error("Data retrieval error!", mysqli_error($con));
-            }
-            else{
+            } else {
                 echo "No Article Data Found!";
             }
-        }else {
+        } else {
             output_table_open();
 
             $last_article = null;
             $sources = array();
             $authors = array();
 
-            while($row = $result -> fetch_array()) {
-                if($last_article != $row["ArticleID"]) {
-                    if($last_article != null) {
+            while ($row = $result->fetch_array()) {
+                if ($last_article != $row["ArticleID"]) {
+                    if ($last_article != null) {
                         output_person_detail_row($authors, $sources);
                     }
 
                     output_article_row($row["ArticleID"], $row["Title"], $row["Category"], $row["DatePublished"], $row["LastUpdated"], $row["Description"], $row["Language"]);
-                    $sources = array();
-                    $authors = array();
+                    $sources = array($row["SourceID"], $row["SourceType"], $row["Citation"]);
+                    $authors = array($row["AuthorID"], $row["FirstName"], $row["LastName"], $row["Department"]);
 
                 }
 
-                if(!in_array($row["Citation"], $sources))
-                    $sources = $row["Citation"];
-                if(!in_array($row["FirstName"], $authors))
-                    $authors = $row["FirstName"];
+                if (!in_array($row["Citation"], $sources)) {
+                    $sources = array($row["SourceID"], $row["SourceType"], $row["Citation"]);
+                }
+                if (!in_array($row["FirstName"], $authors)) {
+                    $authors = array($row["AuthorID"], $row["FirstName"], $row["LastName"], $row["Department"]);
+                }
                 $last_article = $row["ArticleID"];
+
+
             }
 
+            output_person_detail_row($authors, $sources);
             output_table_close();
         }
-    } ?>
+
+    }?>
 </div>
 
 </body>
 
 <?php include_once ("footer.php"); ?>
-</html>
+</html>}
