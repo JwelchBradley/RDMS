@@ -34,7 +34,7 @@ function output_error ($title, $message) {
 
 <body>
 <div class="container">
-    <h1>News Data Report</h1>
+    <h1>News, Category, Media Report</h1>
 
     <?php
     if($connection_error){
